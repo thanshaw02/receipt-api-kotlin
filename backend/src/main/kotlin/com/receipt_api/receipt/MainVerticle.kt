@@ -1,5 +1,6 @@
 package com.receipt_api.receipt
 
+import com.receipt_api.receipt.ReceiptProcessor.ReceiptProcessor
 import com.receipt_api.receipt.models.Item
 import com.receipt_api.receipt.models.Receipt
 import io.vertx.core.AbstractVerticle
@@ -53,35 +54,39 @@ class MainVerticle : AbstractVerticle() {
 
   private fun processReceipt(context: RoutingContext) {
     // test Receipt Object
-    val itemss: Array<Item> = arrayOf(
-      Item(
-        shortDescription = "Mountain Dew 12PK",
-        price = "6.49"
-      ),
-    )
-    val receipt = Receipt(
-      id = "blahhhh",
-      retailer = "Target",
-      purchaseDate = "2022-01-01",
-      purchaseTime = "13:01",
-      items = itemss,
-      total = "6.49",
-      points = "12"
-    )
+//    val itemss: Array<Item> = arrayOf(
+//      Item(
+//        shortDescription = "Mountain Dew 12PK",
+//        price = "6.49"
+//      ),
+//    )
+//    val receipt = Receipt(
+//      id = "blahhhh",
+//      retailer = "Target",
+//      purchaseDate = "2022-01-01",
+//      purchaseTime = "13:01",
+//      items = itemss,
+//      total = "6.49",
+//      points = "12"
+//    )
 
-//    val id = context.request().getParam("id")
-    val retailer = context.request().getParam("retailer")
-    val purchaseDate = context.request().getParam("purchaseDate")
-    val purchaseTime = context.request().getParam("purchaseTime")
-    val items = context.request().getParam("items")
-    val total = context.request().getParam("total")
-//    val points = context.request().getParam("points")
+    val body = context.getBodyAsJson();
+    body ?: run {
+      // handle an empty request here
+      context.response().statusCode = 400
+      context.response().putHeader("Content-Type", "application/json")
+      context.response().end("{ error: \"POST body is missing required data\" }")
+      return
+    }
 
-    println("\n{ \nretailer: ${retailer}, \npurchaseDate: ${purchaseDate}, \npurchaseTime: ${purchaseTime}, \nitems: ${items}, \ntotal: ${total} \n}\n")
+    // create receipt object
+    // this way sucks, i can't import "gson" so i have to do this by hand for now
+    val receipt = ReceiptProcessor.fromJson(body)
+    println(receipt)
 
     context.response().statusCode = 200
 
     context.response().putHeader("Content-Type", "application/json")
-    context.response().end(receipt.toJson())
+    context.response().end("Testing")
   }
 }

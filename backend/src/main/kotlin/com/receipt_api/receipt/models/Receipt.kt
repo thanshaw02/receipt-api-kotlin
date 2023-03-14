@@ -1,17 +1,19 @@
 package com.receipt_api.receipt.models
 
+import io.vertx.core.json.JsonObject
+
 data class Receipt(
-  val id: String,
-  val retailer: String,
-  val purchaseDate: String,
-  val purchaseTime: String,
-  val items: Array<Item>, // may override a few methods for this later
-  val total: String,
-  val points: String
+//  val id: String,
+  var retailer: String = "",
+  var purchaseDate: String = "",
+  var purchaseTime: String = "",
+  var items: Array<Item> = emptyArray(), // may override a few methods for this later
+  var total: String = "",
+//  val points: String
 ) {
   fun toJson(): String {
     var json = "{ " +
-      "id: ${id}, " +
+//      "id: ${id}, " +
       "retailer: ${retailer}, " +
       "purchaseDate: ${purchaseDate}, " +
       "purchaseTime: ${purchaseTime}, " +
@@ -25,7 +27,8 @@ data class Receipt(
       }
     }
 
-    json += "total: ${total}, points: ${points}}"
+    json += "total: ${total}}"
+//    json += "total: ${total}, points: ${points}}"
 
     return json
   }
