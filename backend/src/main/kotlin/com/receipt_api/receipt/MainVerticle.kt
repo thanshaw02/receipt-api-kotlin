@@ -1,11 +1,8 @@
 package com.receipt_api.receipt
 
 import com.receipt_api.receipt.ReceiptProcessor.ReceiptProcessor
-import com.receipt_api.receipt.models.Item
-import com.receipt_api.receipt.models.Receipt
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
-import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
@@ -40,8 +37,9 @@ class MainVerticle : AbstractVerticle() {
     body ?: run {
       // handle an empty request here
       context.response().statusCode = 400
+      context.response().putHeader("x-receipt-missing-data", "true")
       context.response().putHeader("Content-Type", "application/json")
-      context.response().end("{ error: \"POST body is missing required data\" }")
+      context.response().end("{ \"error\": \"POST body is missing required data\" }")
       return
     }
 
@@ -67,7 +65,9 @@ class MainVerticle : AbstractVerticle() {
     foundReceipt ?: run {
       context.response().statusCode = 404
       context.response().putHeader("x-receipt-not-exist", pathParamId)
-      context.response().write("{ \"error\": \"receipt not found\" }")
+      context.response().putHeader("Content-Type", "application/json")
+      context.response().end("{ \"error\": \"receipt not found\" }")
+      return
     }
 
     context.response().statusCode = 200
