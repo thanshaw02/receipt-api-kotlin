@@ -1,19 +1,19 @@
 package com.receipt_api.receipt.models
 
-import io.vertx.core.json.JsonObject
+import java.util.UUID
 
 data class Receipt(
-//  val id: String,
+  val id: String = UUID.randomUUID().toString(),
   var retailer: String = "",
   var purchaseDate: String = "",
   var purchaseTime: String = "",
   var items: Array<Item> = emptyArray(), // may override a few methods for this later
   var total: String = "",
-//  val points: String
+  val points: Int = 0
 ) {
   fun toJson(): String {
     var json = "{ " +
-//      "id: ${id}, " +
+      "id: ${id}, " +
       "retailer: ${retailer}, " +
       "purchaseDate: ${purchaseDate}, " +
       "purchaseTime: ${purchaseTime}, " +

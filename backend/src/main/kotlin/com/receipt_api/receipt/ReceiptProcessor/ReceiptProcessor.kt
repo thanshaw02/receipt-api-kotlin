@@ -5,12 +5,12 @@ import com.receipt_api.receipt.models.Receipt
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
 import io.vertx.kotlin.core.json.get
-import kotlin.reflect.typeOf
 
 object ReceiptProcessor {
   // processes a receipt object and accrues any/all points for it
-  fun processReceipt(receipt: Receipt) {
+  fun processReceipt(receipt: Receipt): Int {
 
+    return -1
   }
 
   // parse POST JSON body to create a Receipt object
