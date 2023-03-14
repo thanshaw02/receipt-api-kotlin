@@ -23,25 +23,6 @@ class MainVerticle : AbstractVerticle() {
       get("/receipts/:id/points").handler(BodyHandler.create()).handler(this@MainVerticle::getReceiptPointsById)
     }
 
-    // Mount the handler for all incoming requests at every path and HTTP method
-    router.route().handler { context ->
-      // Get the address of the request
-      val address = context.request().connection().remoteAddress().toString()
-      // Get the query parameter "name"
-      val queryParams = context.queryParams()
-      val name = queryParams.get("name") ?: "unknown"
-      // Write a json response
-      context.json(
-        json {
-          obj(
-            "name" to name,
-            "address" to address,
-            "message" to "Hello $name connected from $address"
-          )
-        }
-      )
-    }
-
     // Create the HTTP server
     vertx.createHttpServer()
       // Handle every request using the router
@@ -72,6 +53,8 @@ class MainVerticle : AbstractVerticle() {
     val receiptPoints = ReceiptProcessor.processReceipt(receipt)
     inMemoryCache[receipt.id] = receiptPoints
 
+    println("Receipt points accrued: ${receipt.points}")
+
     context.response().statusCode = 200
     context.response().putHeader("Content-Type", "application/json")
     context.response().end("{ \"id\": ${receipt.id} }")
@@ -81,7 +64,7 @@ class MainVerticle : AbstractVerticle() {
     val pathParamId = context.pathParam("id")
 
     val foundReceipt = inMemoryCache[pathParamId]
-    if (foundReceipt == null) {
+    foundReceipt ?: run {
       context.response().statusCode = 404
       context.response().putHeader("x-receipt-not-exist", pathParamId)
       context.response().write("{ \"error\": \"receipt not found\" }")

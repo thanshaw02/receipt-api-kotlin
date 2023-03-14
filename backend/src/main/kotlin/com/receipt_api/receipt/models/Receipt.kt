@@ -1,5 +1,6 @@
 package com.receipt_api.receipt.models
 
+import java.math.BigDecimal
 import java.util.UUID
 
 data class Receipt(
@@ -8,8 +9,8 @@ data class Receipt(
   var purchaseDate: String = "",
   var purchaseTime: String = "",
   var items: Array<Item> = emptyArray(), // may override a few methods for this later
-  var total: String = "",
-  val points: Int = 0
+  var total: BigDecimal = BigDecimal.ZERO,
+  var points: Int = 0
 ) {
   fun toJson(): String {
     var json = "{ " +
@@ -36,5 +37,5 @@ data class Receipt(
 
 data class Item(
   val shortDescription: String,
-  val price: String
+  val price: BigDecimal
 )
