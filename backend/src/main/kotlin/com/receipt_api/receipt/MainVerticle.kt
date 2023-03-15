@@ -43,19 +43,28 @@ class MainVerticle : AbstractVerticle() {
       return
     }
 
-    // create receipt object
-    // this way sucks, i can't import "gson" so i have to do this by hand for now
-    val receipt = ReceiptProcessor.fromJson(body)
+    try {
+      // create receipt object
+      // this way sucks, i can't import "gson" so i have to do this by hand for now
+      val receipt = ReceiptProcessor.fromJson(body)
+      println(receipt)
 
-    // process receipt object and store it in memory
-    val receiptPoints = ReceiptProcessor.processReceipt(receipt)
-    inMemoryCache[receipt.id] = receiptPoints
+      // process receipt object and store it in memory
+      val receiptPoints = ReceiptProcessor.processReceipt(receipt)
+      inMemoryCache[receipt.id] = receiptPoints
 
-    println("Receipt points accrued: ${receipt.points}")
+      context.response().statusCode = 200
+      context.response().putHeader("Content-Type", "application/json")
+      context.response().end("{ \"id\": ${receipt.id} }")
+    } catch (e: Error) {
+      val cause = e.cause?.message
+      val message = e.message
 
-    context.response().statusCode = 200
-    context.response().putHeader("Content-Type", "application/json")
-    context.response().end("{ \"id\": ${receipt.id} }")
+      context.response().statusCode = 400
+      context.response().putHeader("x-receipt-missing-data", cause)
+      context.response().putHeader("Content-Type", "application/json")
+      context.response().end("{ \"error\": \"$message\" }")
+    }
   }
 
   private fun getReceiptPointsById(context: RoutingContext) {
