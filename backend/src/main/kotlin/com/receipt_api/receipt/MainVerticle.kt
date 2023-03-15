@@ -25,7 +25,7 @@ class MainVerticle : AbstractVerticle() {
       // Handle every request using the router
       .requestHandler(router)
       // Start listening
-      .listen(8888)
+      .listen(8000)
       // Print the port
       .onSuccess { server ->
         println("HTTP server started on port " + server.actualPort())
@@ -37,7 +37,7 @@ class MainVerticle : AbstractVerticle() {
     body ?: run {
       // handle an empty request here
       context.response().statusCode = 400
-      context.response().putHeader("x-receipt-missing-data", "true")
+      context.response().putHeader("X-Receipt-Missing-Data", "true")
       context.response().putHeader("Content-Type", "application/json")
       context.response().end("{ \"error\": \"POST body is missing required data\" }")
       return
@@ -57,11 +57,12 @@ class MainVerticle : AbstractVerticle() {
       context.response().putHeader("Content-Type", "application/json")
       context.response().end("{ \"id\": ${receipt.id} }")
     } catch (e: Error) {
+      // handle missing attributes in request here
       val cause = e.cause?.message
       val message = e.message
 
       context.response().statusCode = 400
-      context.response().putHeader("x-receipt-missing-data", cause)
+      context.response().putHeader("X-Receipt-Missing-Data", cause)
       context.response().putHeader("Content-Type", "application/json")
       context.response().end("{ \"error\": \"$message\" }")
     }
@@ -73,7 +74,7 @@ class MainVerticle : AbstractVerticle() {
     val foundReceipt = inMemoryCache[pathParamId]
     foundReceipt ?: run {
       context.response().statusCode = 404
-      context.response().putHeader("x-receipt-not-exist", pathParamId)
+      context.response().putHeader("X-Receipt-Not-Exist", pathParamId)
       context.response().putHeader("Content-Type", "application/json")
       context.response().end("{ \"error\": \"receipt not found\" }")
       return
