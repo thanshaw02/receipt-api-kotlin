@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from "@angular/common/http";
 
 // Angular MUI imports
 import { MatCardModule } from '@angular/material/card';
@@ -38,6 +39,7 @@ import { ReceiptItemListComponent } from './components/receipt-item-list/receipt
     MatInputModule,
     MatButtonModule,
     MatGridListModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
