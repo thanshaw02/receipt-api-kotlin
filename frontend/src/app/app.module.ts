@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing/index';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReceiptFormComponent } from './components/receipt-form/receipt-form.component';
-import {MatCardModule} from '@angular/material/card';
+import { 
+  ReceiptFormComponent,
+} from './components/index';
 
 @NgModule({
   declarations: [
