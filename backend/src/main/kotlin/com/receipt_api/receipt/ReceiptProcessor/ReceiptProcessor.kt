@@ -21,15 +21,13 @@ object ReceiptProcessor {
     receipt.points += countAlphanumericCharacters(receipt.retailer)
 
     // 50 points if the total is a round dollar amount with no cents.
-    val foo = receipt.total.rem(BigDecimal(1))
-    println("Dividing total price by 1: $foo")
-    if (receipt.total.rem(BigDecimal(1)) === BigDecimal(0.00)) {
+    if (receipt.total.rem(BigDecimal(1)).compareTo(BigDecimal.ZERO) == 0) {
       println("Total price is round number")
       receipt.points += 50
     }
 
     // 25 points if the total is a multiple of 0.25.
-    if (receipt.total.rem(BigDecimal(0.25)) == BigDecimal(0)) {
+    if (receipt.total.rem(BigDecimal(0.25)).compareTo(BigDecimal.ZERO) == 0) {
       println("Total price is a multiple of 0.25")
       receipt.points += 25
     }
@@ -139,7 +137,7 @@ object ReceiptProcessor {
   private fun determinePurchaseTime(hour: Int): Int {
     var count = 0
     if (hour in 14..16) {
-      count = 6
+      count = 10
     }
 
     return count
