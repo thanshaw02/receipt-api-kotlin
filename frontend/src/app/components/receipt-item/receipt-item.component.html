@@ -1,0 +1,46 @@
+<div>
+
+  <!-- Receipt item title -->
+  <span>{{ receiptItem?.shortDescription || "Add Item" }}</span>
+
+  <!-- Receipt item short description -->
+  <mat-form-field style="margin-top: 1rem;">
+    <mat-label for="short-description">
+      Short Description
+    </mat-label>
+    <input 
+      id="short-description" 
+      matInput 
+      type="text"
+      value="{{receiptItem?.shortDescription || ''}}"
+      #shortDescription
+    >
+  </mat-form-field>
+
+  <!-- Receipt item price -->
+  <mat-form-field style="margin-top: 1rem;">
+    <mat-label for="price">
+      Price
+    </mat-label>
+    <input 
+      id="price" 
+      matInput 
+      type="text" 
+      value="{{receiptItem?.price || ''}}" 
+      #price
+    >
+  </mat-form-field>
+
+  <!-- Button displayed only if this element is the template one -->
+  <!-- NOTE: Add "+" icon to this button if possible to make it look nice -->
+  <div *ngIf="!receiptItem">
+    <button 
+      mat-raised-button 
+      type="button" 
+      (click)="addReceiptItem(shortDescription.value, price.value)"
+    >
+      Add Item
+    </button>
+  </div>
+
+</div>

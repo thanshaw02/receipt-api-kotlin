@@ -20,12 +20,14 @@ import {
   ReceiptFormComponent,
 } from './components/index';
 import { ReceiptItemListComponent } from './components/receipt-item-list/receipt-item-list.component';
+import { ReceiptItemComponent } from './components/receipt-item/receipt-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReceiptFormComponent,
-    ReceiptItemListComponent
+    ReceiptItemListComponent,
+    ReceiptItemComponent
   ],
   imports: [
     BrowserModule,

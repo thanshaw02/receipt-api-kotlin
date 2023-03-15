@@ -20,7 +20,6 @@ export class ReceiptApiService {
   public constructor(private http: HttpClient) { }
 
   public processReceipt(receipt: Receipt): Observable<ReceiptIdResponse> {
-    console.log(`\nReceipt sent to backend:\n${JSON.stringify(receipt)}\n`);
     return this.http.post<ReceiptIdResponse>(`${this.API_URL}/receipts/process`, receipt, this.httpOptions).pipe(
       tap((id) => console.log(`Receipt ID from processing receipt: ${id}`)),
       catchError(this.handleError<ReceiptIdResponse>("processReceipt"))

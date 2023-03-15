@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ReceiptItem } from 'src/app/model';
 
 @Component({
   selector: 'app-receipt-item-list',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./receipt-item-list.component.css']
 })
 export class ReceiptItemListComponent {
+  // @Output()
+  // public receiptItems = new EventEmitter<Array<ReceiptItem>>();
 
+  public receiptItems: Array<ReceiptItem> = [
+    // {
+    //   shortDescription: "Test",
+    //   price: "3.29"
+    // }
+  ];
+
+  public addNewReceiptItem(receiptItem: ReceiptItem) {
+    this.receiptItems.push(receiptItem);
+    console.log(`ReceiptItems so far:\n${this.receiptItems}`);
+  }
 }
