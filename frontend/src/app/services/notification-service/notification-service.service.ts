@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ReceiptError, ReceiptSuccess, SnackbarSeverity } from "src/app/model";
+import { ReceiptError, ReceiptSuccess, SnackbarSeverity } from "../../model";
 import { NotificationSnackbarComponent } from "../../components";
 
 @Injectable({
@@ -22,5 +22,5 @@ export class NotificationService {
       },
     });
   }
-  
+
 }
