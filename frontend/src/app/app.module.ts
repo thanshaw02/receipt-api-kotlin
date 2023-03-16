@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon"
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Project component imports
 import { AppRoutingModule } from './app-routing/index';
@@ -42,6 +43,7 @@ import { ReceiptItemComponent } from './components/receipt-item/receipt-item.com
     MatButtonModule,
     HttpClientModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
