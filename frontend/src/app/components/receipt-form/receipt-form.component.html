@@ -29,12 +29,12 @@
           <br>
 
           <!-- Items -->
-          <app-receipt-item-list></app-receipt-item-list>
+          <app-receipt-item-list (receiptItemsEmitter)="updateReceiptItems($event)"/>
 
           <!-- Total -->
           <mat-form-field>
             <mat-label for="total">Total</mat-label>
-            <input id="total" matInput type="text" formControlName="total">
+            <input disabled id="total" matInput type="number" value="{{ total }}">
           </mat-form-field>
           <br>
 

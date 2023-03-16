@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 9rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 mat-card-title {

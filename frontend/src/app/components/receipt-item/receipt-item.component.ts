@@ -14,10 +14,13 @@ import { ReceiptItem } from 'src/app/model';
 export class ReceiptItemComponent {
 
   // this is used for displaying an already added ReceiptItem
-  @Input() public receiptItem?: ReceiptItem;
+  @Input() 
+  public receiptItem?: ReceiptItem;
 
+  // observable used between this component and parent component (ReceiptItemListComponent)
   // this emits when a new ReceiptItem is created/add
-  @Output() public receiptItemEmitter = new EventEmitter<ReceiptItem>();
+  @Output() 
+  public receiptItemEmitter = new EventEmitter<ReceiptItem>();
 
   public addReceiptItem(shortDescription: string, price: string): void {
     // emites the newly created ReceiptItem to the parent component "ReceiptItemList"

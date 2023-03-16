@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Receipt } from 'src/app/model';
+import { Receipt, ReceiptItem } from 'src/app/model';
 import { ReceiptApiService } from "../../services";
 
 @Component({
@@ -12,13 +12,21 @@ export class ReceiptFormComponent {
 
   constructor(private receiptApiService: ReceiptApiService) { }
 
+  // receipt fields
+  public receiptItems: Array<ReceiptItem> = [];
+  public total = "0.00";
   public receiptForm = new FormGroup({
     retailerName: new FormControl(""),
     purchaseDate: new FormControl(""),
     purchaseTime: new FormControl(""),
-    items: new FormControl([]), // this one will be interesting
-    total: new FormControl("")
   });
+
+  // binding between array of ReceiptItem's in child component (ReceiptItemList) and this component
+  public updateReceiptItems(receiptItem: ReceiptItem): void {
+    const summedTotal = (+this.total + (+receiptItem.price)).toString();
+    this.total = parseFloat(summedTotal).toFixed(2);
+    this.receiptItems.push(receiptItem)
+  }
 
   public submitForm(): void {
     const possibleReceipt = this.isFormValid();
@@ -52,9 +60,8 @@ export class ReceiptFormComponent {
       return;
     }
 
-    const total = this.receiptForm.value.total;
-    if (!total) {
-      console.warn("Total is missing from the form");
+    if (!this.receiptItems.length) {
+      console.warn("No items have been added to the receipt");
       return;
     }
 
@@ -62,8 +69,8 @@ export class ReceiptFormComponent {
       retailer: retailer,
       purchaseDate: purchaseDate,
       purchaseTime: purchaseTime,
-      items: [], //undefined, // leaving empty for now until I can get the items component working like it does in my React version
-      total: total
+      items: this.receiptItems,
+      total: this.total
     };
     return receipt;
   }

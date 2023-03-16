@@ -31,7 +31,7 @@
           disabled="{{ receiptItem !== undefined }}"
           id="price" 
           matInput 
-          type="text" 
+          type="number" 
           value="{{receiptItem?.price || ''}}" 
           #price
         >
@@ -43,6 +43,7 @@
   <!-- Button displayed only if this element is the template one -->
   <!-- NOTE: Add "+" icon to this button if possible to make it look nice -->
   <button
+    type="button"
     mat-raised-button
     (click)="addReceiptItem(shortDescription.value, price.value)"
   >

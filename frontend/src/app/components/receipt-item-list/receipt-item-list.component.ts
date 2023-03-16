@@ -7,13 +7,17 @@ import { ReceiptItem } from 'src/app/model';
   styleUrls: ['./receipt-item-list.component.css']
 })
 export class ReceiptItemListComponent {
-  // @Output()
-  // public receiptItems = new EventEmitter<Array<ReceiptItem>>();
+  // observable used between this component and parent component (ReceiptFormComponent)
+  // used to add to the ReceiptItem array in the ReceiptFormComponent to eventually be sent to the backend
+  @Output() 
+  public receiptItemsEmitter = new EventEmitter<ReceiptItem>();
 
+  // used to display the list of ReceiptItem's to the user
   public receiptItems: Array<ReceiptItem> = [];
 
+  // binding between single added ReceiptItem from child component (ReceiptItemComponent) and this component
   public addNewReceiptItem(receiptItem: ReceiptItem) {
     this.receiptItems.push(receiptItem);
-    console.log(`ReceiptItems so far:\n${this.receiptItems}`);
+    this.receiptItemsEmitter.emit(receiptItem);
   }
 }
