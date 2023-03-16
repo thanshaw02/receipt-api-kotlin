@@ -1,13 +1,15 @@
 import Receipt from "./receipt";
 import {
-  ReceiptItem,
+  ReceiptError,
   ReceiptIdResponse,
+  ReceiptItem,
   ReceiptPointsResponse,
 } from "./receipt";
 
 export {
   Receipt,
+  ReceiptError,
   ReceiptIdResponse,
-  ReceiptPointsResponse,
   ReceiptItem,
+  ReceiptPointsResponse,
 };

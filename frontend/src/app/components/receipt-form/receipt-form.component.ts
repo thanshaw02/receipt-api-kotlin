@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Receipt, ReceiptItem } from 'src/app/model';
+import { ReceiptError, Receipt, ReceiptItem } from 'src/app/model';
 import { NotificationService, ReceiptApiService } from "../../services";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -44,7 +44,7 @@ export class ReceiptFormComponent {
         },
         (err) => {
           console.error(`Error posting receipt object -- ${err}`);
-          this.notificationService.setNotification(this.notificationSnackBar, "There was an error submitting the receipt");
+          this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.ReceiptSubmissionError);
         }
       );
     } catch(e: any) {
@@ -55,25 +55,21 @@ export class ReceiptFormComponent {
   private isFormValid(): Receipt {
     const retailer = this.receiptForm.value.retailerName;
     if (!retailer) {
-      console.warn("Retailer name is missing from form");
-      throw new Error("Retailer name is missing from the form");
+      throw new Error(ReceiptError.MissingRetailer);
     }
 
     const purchaseDate = this.receiptForm.value.purchaseDate;
     if (!purchaseDate) {
-      console.warn("Purchase date is missing from form");
-      throw new Error("Purchase date is missing from the form");
+      throw new Error(ReceiptError.MissingPurchaseDate);
     }
 
     const purchaseTime = this.receiptForm.value.purchaseTime;
     if (!purchaseTime) {
-      console.warn("Purchase time is missing from the form");
-      throw new Error("Purchase time is missing from the form");
+      throw new Error(ReceiptError.MissingPurchaseTime);
     }
 
     if (!this.receiptItems.length) {
-      console.warn("No items have been added to the receipt");
-      throw new Error("No items have been added to the receipt");
+      throw new Error(ReceiptError.MissingReceiptItems);
     }
 
     const receipt: Receipt = {

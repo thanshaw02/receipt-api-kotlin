@@ -4,7 +4,9 @@ import {
   Input,
   Output 
 } from '@angular/core';
-import { ReceiptItem } from 'src/app/model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReceiptError, ReceiptItem } from 'src/app/model';
+import { NotificationService } from 'src/app/services';
 
 @Component({
   selector: 'app-receipt-item',
@@ -12,6 +14,11 @@ import { ReceiptItem } from 'src/app/model';
   styleUrls: ['./receipt-item.component.css']
 })
 export class ReceiptItemComponent {
+
+  public constructor(
+    private notificationService: NotificationService,
+    private notificationSnackBar: MatSnackBar,
+  ) { }
 
   // this is used for displaying an already added ReceiptItem
   @Input() 
@@ -23,10 +30,16 @@ export class ReceiptItemComponent {
   public receiptItemEmitter = new EventEmitter<ReceiptItem>();
 
   public addReceiptItem(shortDescription: string, price: string): void {
-    // emites the newly created ReceiptItem to the parent component "ReceiptItemList"
-    this.receiptItemEmitter.emit({
-      shortDescription: shortDescription,
-      price: price
-    });
+    if (!shortDescription) {
+      this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.MissingItemDescription);
+    } else if (!price) {
+      this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.MissingItemPrice);
+    } else {
+      // emites the newly created ReceiptItem to the parent component "ReceiptItemList"
+      this.receiptItemEmitter.emit({
+        shortDescription: shortDescription,
+        price: price
+      });
+    }
   }
 }
