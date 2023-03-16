@@ -1,16 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Receipt, ReceiptItem } from 'src/app/model';
-import { ReceiptApiService } from "../../services";
+import {
+  ReceiptError,
+  ReceiptSuccess,
+  Receipt,
+  ReceiptItem,
+  SnackbarSeverity
+} from 'src/app/model';
+import { NotificationService, ReceiptApiService } from "../../services";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-receipt-form',
   templateUrl: './receipt-form.component.html',
-  styleUrls: ['./receipt-form.component.css']
+  styleUrls: ['./receipt-form.component.css'],
 })
 export class ReceiptFormComponent {
 
-  constructor(private receiptApiService: ReceiptApiService) { }
+  constructor(
+    private notificationService: NotificationService,
+    private notificationSnackBar: MatSnackBar,
+    private receiptApiService: ReceiptApiService
+  ) { }
 
   // receipt fields
   public receiptItems: Array<ReceiptItem> = [];
@@ -29,40 +40,42 @@ export class ReceiptFormComponent {
   }
 
   public submitForm(): void {
-    const possibleReceipt = this.isFormValid();
-    if (!possibleReceipt) {
-      return;
+    try {
+      const possibleReceipt = this.isFormValid();
+
+      this.receiptApiService.processReceipt(possibleReceipt).subscribe(
+        (receiptId) => {
+          console.log(`\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`);
+          this.notificationService.setNotification(this.notificationSnackBar, ReceiptSuccess.ReceiptSubmission, SnackbarSeverity.Success);
+        },
+        (err) => {
+          console.error(`Error posting receipt object -- ${err}`);
+          this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.ReceiptSubmissionError);
+        }
+      );
+    } catch(e: any) {
+      this.notificationService.setNotification(this.notificationSnackBar, e.message);
     }
-    
-    this.receiptApiService.processReceipt(possibleReceipt).subscribe(
-      (receiptId) => {
-        console.log(`\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`);
-      }
-    );
   }
 
-  private isFormValid(): Receipt | undefined {
+  private isFormValid(): Receipt {
     const retailer = this.receiptForm.value.retailerName;
     if (!retailer) {
-      console.warn("Retailer name is missing from form");
-      return;
+      throw new Error(ReceiptError.MissingRetailer);
     }
 
     const purchaseDate = this.receiptForm.value.purchaseDate;
     if (!purchaseDate) {
-      console.warn("Purchase date is missing from form");
-      return;
+      throw new Error(ReceiptError.MissingPurchaseDate);
     }
 
     const purchaseTime = this.receiptForm.value.purchaseTime;
     if (!purchaseTime) {
-      console.warn("Purchase time is missing from the form");
-      return;
+      throw new Error(ReceiptError.MissingPurchaseTime);
     }
 
     if (!this.receiptItems.length) {
-      console.warn("No items have been added to the receipt");
-      return;
+      throw new Error(ReceiptError.MissingReceiptItems);
     }
 
     const receipt: Receipt = {

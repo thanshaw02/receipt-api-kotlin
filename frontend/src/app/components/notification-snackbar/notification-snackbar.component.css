@@ -1,0 +1,48 @@
+:host { display: flex; }
+
+.snackbar-error {
+  font-weight: lighter;
+
+  /* light from inspecting mui element */
+  color: rgb(95, 33, 32);
+  background-color: rgb(253, 237, 237);
+
+  /* light */
+  /* background-color: #ef5350; */
+
+  /* main */
+  /* background-color: #d32f2f;  */
+
+  /* dark */
+  /* background-color: #c62828; */
+}
+
+.snackbar-success {
+  font-weight: lighter;
+
+  /* light from inspecting mui element */
+  color: rgb(30, 70, 32);
+  background-color: rgb(237, 247, 237);
+
+  /* light */
+  /* background-color: #4caf50; */
+
+  /* main */
+  /* background-color: #2e7d32;  */
+
+  /* dark */
+  /* background-color: #1b5e20; */
+}
+
+.text-radius {
+  text-align: center;
+  margin-left: -1.5rem; /* this is to compensate for the negative margin towards the right of the snackbar */
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.button-radius {
+  margin-right: -2rem; /* this is hacky, there's extra room to the right of the button for some reason */
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

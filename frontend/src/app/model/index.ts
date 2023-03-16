@@ -1,13 +1,23 @@
-import Receipt from "./receipt";
 import {
-  ReceiptItem,
+  Receipt,
   ReceiptIdResponse,
+  ReceiptItem,
   ReceiptPointsResponse,
 } from "./receipt";
+import {
+  ReceiptError,
+  ReceiptSuccess,
+  SnackbarData,
+  SnackbarSeverity
+} from "./snackbar-data"
 
 export {
   Receipt,
+  ReceiptError,
+  ReceiptSuccess,
   ReceiptIdResponse,
-  ReceiptPointsResponse,
   ReceiptItem,
+  ReceiptPointsResponse,
+  SnackbarData,
+  SnackbarSeverity,
 };

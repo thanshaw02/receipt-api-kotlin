@@ -1,12 +1,12 @@
-export type ReceiptPointsResponse = {
+type ReceiptPointsResponse = {
   points: string;
 };
 
-export type ReceiptIdResponse = {
+type ReceiptIdResponse = {
   id: string;
 };
 
-export type ReceiptItem = {
+type ReceiptItem = {
   shortDescription: string;
   price: string;
 };
@@ -19,4 +19,9 @@ type Receipt = {
   total: string;
 };
 
-export default Receipt;
+export {
+  Receipt,
+  ReceiptItem,
+  ReceiptIdResponse,
+  ReceiptPointsResponse,
+};
