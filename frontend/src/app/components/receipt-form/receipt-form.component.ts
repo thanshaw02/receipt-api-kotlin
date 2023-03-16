@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { ViewReceiptPointsComponent } from "../view-receipt-points/view-receipt-points.component";
 import {
   ReceiptError,
   ReceiptSuccess,
@@ -11,7 +14,6 @@ import {
   NotificationService,
   ReceiptApiService,
 } from "../../services";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-receipt-form",
@@ -20,9 +22,10 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ReceiptFormComponent {
   constructor(
-    private notificationService: NotificationService,
+    private viewReceiptPointsSheet: MatBottomSheet,
     private notificationSnackBar: MatSnackBar,
-    private receiptApiService: ReceiptApiService
+    private receiptApiService: ReceiptApiService,
+    private notificationService: NotificationService,
   ) {}
 
   // receipt fields
@@ -57,6 +60,10 @@ export class ReceiptFormComponent {
               ReceiptSuccess.ReceiptSubmission,
               SnackbarSeverity.Success
             );
+            // opening instantly for debugging
+            this.viewReceiptPointsSheet.open(ViewReceiptPointsComponent, {
+              data: receiptId.id
+            });
           },
           (err) => {
             console.error(`Error posting receipt object -- ${err}`);
