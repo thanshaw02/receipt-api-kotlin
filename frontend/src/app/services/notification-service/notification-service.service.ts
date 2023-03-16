@@ -1,17 +1,20 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ReceiptError, ReceiptSuccess, SnackbarSeverity } from "../../model";
+import {
+  ReceiptError,
+  ReceiptSuccess,
+  SnackbarSeverity,
+} from "../../model";
 import { NotificationSnackbarComponent } from "../../components";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class NotificationService {
-
   public setNotification(
-    snackBar: MatSnackBar, 
+    snackBar: MatSnackBar,
     message: ReceiptError | ReceiptSuccess,
-    severity: SnackbarSeverity = SnackbarSeverity.Error, // defaults to the "error" severity
+    severity: SnackbarSeverity = SnackbarSeverity.Error // defaults to the "error" severity
   ): void {
     snackBar.openFromComponent(NotificationSnackbarComponent, {
       verticalPosition: "top",
@@ -22,5 +25,4 @@ export class NotificationService {
       },
     });
   }
-
 }

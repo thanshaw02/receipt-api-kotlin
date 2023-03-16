@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ReceiptItem } from 'src/app/model';
+import { Component, EventEmitter, Output } from "@angular/core";
+import { ReceiptItem } from "src/app/model";
 
 @Component({
-  selector: 'app-receipt-item-list',
-  templateUrl: './receipt-item-list.component.html',
-  styleUrls: ['./receipt-item-list.component.css']
+  selector: "app-receipt-item-list",
+  templateUrl: "./receipt-item-list.component.html",
+  styleUrls: ["./receipt-item-list.component.css"],
 })
 export class ReceiptItemListComponent {
   // observable used between this component and parent component (ReceiptFormComponent)
   // used to add to the ReceiptItem array in the ReceiptFormComponent to eventually be sent to the backend
-  @Output() 
+  @Output()
   public receiptItemsEmitter = new EventEmitter<ReceiptItem>();
 
   // used to display the list of ReceiptItem's to the user
