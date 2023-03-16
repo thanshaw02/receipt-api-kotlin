@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { Observable, of } from "rxjs";
 import {
   Receipt,
@@ -62,6 +62,7 @@ export class ReceiptApiService {
   }
 
   private handleError<T>(operation = "operation", result?: T) {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
       return of(result as T);

@@ -66,6 +66,7 @@ export class ReceiptFormComponent {
             );
           }
         );
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     } catch (e: any) {
       this.notificationService.setNotification(
         this.notificationSnackBar,
