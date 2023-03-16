@@ -22,8 +22,3 @@ button {
   width: 22rem;
   margin-left: 0.65rem;
 }
-
-::ng-deep .snackbar-warning {
-  color: black !important;
-  background-color: red !important;
-}
