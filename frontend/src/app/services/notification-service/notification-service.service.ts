@@ -8,8 +8,6 @@ import { NotificationSnackbarComponent } from "../../components";
 })
 export class NotificationService {
 
-  constructor() { }
-  
   public setNotification(
     snackBar: MatSnackBar, 
     message: ReceiptError | ReceiptSuccess,
@@ -17,11 +15,12 @@ export class NotificationService {
   ): void {
     snackBar.openFromComponent(NotificationSnackbarComponent, {
       verticalPosition: "top",
-      // duration: 5000,
+      duration: 5000, // if the user doesn't close the snackbar after 5 seconds it will close itself
       data: {
         message: message,
         severity: severity,
       },
     });
   }
+  
 }

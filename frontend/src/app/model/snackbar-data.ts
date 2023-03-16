@@ -4,7 +4,7 @@ type SnackbarData = {
 };
 
 enum SnackbarSeverity {
-  Sucess = "snackbar-success",
+  Success = "snackbar-success",
   Error = "snackbar-error"
 };
 

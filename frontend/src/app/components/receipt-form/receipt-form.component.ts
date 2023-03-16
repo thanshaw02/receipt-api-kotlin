@@ -46,7 +46,7 @@ export class ReceiptFormComponent {
       this.receiptApiService.processReceipt(possibleReceipt).subscribe(
         (receiptId) => {
           console.log(`\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`);
-          this.notificationService.setNotification(this.notificationSnackBar, ReceiptSuccess.ReceiptSubmission, SnackbarSeverity.Sucess);
+          this.notificationService.setNotification(this.notificationSnackBar, ReceiptSuccess.ReceiptSubmission, SnackbarSeverity.Success);
         },
         (err) => {
           console.error(`Error posting receipt object -- ${err}`);
