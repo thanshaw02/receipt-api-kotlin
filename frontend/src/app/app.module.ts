@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon"
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
 
 // Project component imports
 import { AppRoutingModule } from './app-routing/index';
@@ -40,8 +40,8 @@ import { ReceiptItemComponent } from './components/receipt-item/receipt-item.com
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatGridListModule,
     HttpClientModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,10 +16,6 @@ export class ReceiptItemComponent {
   // this is used for displaying an already added ReceiptItem
   @Input() public receiptItem?: ReceiptItem;
 
-  constructor() {
-    console.log(`ReceiptItem on init: ${JSON.stringify(this.receiptItem)}`);
-  }
-
   // this emits when a new ReceiptItem is created/add
   @Output() public receiptItemEmitter = new EventEmitter<ReceiptItem>();
 

@@ -1,8 +1,8 @@
 .main-div{
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 mat-card-title {
@@ -15,4 +15,9 @@ mat-card-content {
 
 mat-form-field {
   width: 23rem;
+}
+
+button {
+  width: 22rem;
+  margin-left: 0.65rem;
 }

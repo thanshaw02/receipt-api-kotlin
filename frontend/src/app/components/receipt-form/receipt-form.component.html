@@ -1,46 +1,47 @@
-<div class="main-div"><mat-card class="main-content">
-  <mat-card-content>
-    <mat-card-title>Enter Receipt Information</mat-card-title>
+<div class="main-div">
+  <mat-card class="main-content">
     <mat-card-content>
+      <mat-card-title>Enter Receipt Information</mat-card-title>
+      <mat-card-content>
 
-      <!-- Receipt Form -->
-      <form [formGroup]="receiptForm" (ngSubmit)="submitForm()">
+        <!-- Receipt Form -->
+        <form [formGroup]="receiptForm" (ngSubmit)="submitForm()">
 
-        <!-- Retailer Name -->
-        <mat-form-field style="margin-top: 1rem;">
-          <mat-label for="retailer-name">Retailer</mat-label>
-          <input id="retailer-name" matInput type="text" formControlName="retailerName">
-        </mat-form-field>
-        <br>
+          <!-- Retailer Name -->
+          <mat-form-field style="margin-top: 1rem;">
+            <mat-label for="retailer-name">Retailer</mat-label>
+            <input id="retailer-name" matInput type="text" formControlName="retailerName">
+          </mat-form-field>
+          <br>
 
-        <!-- Purchase Date -->
-        <mat-form-field>
-          <mat-label for="purchase-date">Purchase Date</mat-label>
-          <input id="purchase-date" matInput type="text" formControlName="purchaseDate">
-        </mat-form-field>
-        <br>
+          <!-- Purchase Date -->
+          <mat-form-field>
+            <mat-label for="purchase-date">Purchase Date</mat-label>
+            <input id="purchase-date" matInput type="text" formControlName="purchaseDate">
+          </mat-form-field>
+          <br>
 
-        <!-- Purchase Time -->
-        <mat-form-field>
-          <mat-label for="purchase-time">Purchase Time</mat-label>
-          <input id="purchase-time" matInput type="text" formControlName="purchaseTime">
-        </mat-form-field>
-        <br>
+          <!-- Purchase Time -->
+          <mat-form-field>
+            <mat-label for="purchase-time">Purchase Time</mat-label>
+            <input id="purchase-time" matInput type="text" formControlName="purchaseTime">
+          </mat-form-field>
+          <br>
 
-        <!-- Items -->
-        <app-receipt-item-list></app-receipt-item-list>
+          <!-- Items -->
+          <app-receipt-item-list></app-receipt-item-list>
 
-        <!-- Total -->
-        <mat-form-field>
-          <mat-label for="total">Total</mat-label>
-          <input id="total" matInput type="text" formControlName="total">
-        </mat-form-field>
-        <br>
+          <!-- Total -->
+          <mat-form-field>
+            <mat-label for="total">Total</mat-label>
+            <input id="total" matInput type="text" formControlName="total">
+          </mat-form-field>
+          <br>
 
-        <!-- Submit -->
-        <button mat-raised-button type="submit">Submit</button>
-      </form>
+          <!-- Submit -->
+          <button mat-raised-button type="submit">Submit</button>
+        </form>
+      </mat-card-content>
     </mat-card-content>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
 </div>

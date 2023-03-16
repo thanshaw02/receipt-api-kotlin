@@ -10,12 +10,7 @@ export class ReceiptItemListComponent {
   // @Output()
   // public receiptItems = new EventEmitter<Array<ReceiptItem>>();
 
-  public receiptItems: Array<ReceiptItem> = [
-    // {
-    //   shortDescription: "Test",
-    //   price: "3.29"
-    // }
-  ];
+  public receiptItems: Array<ReceiptItem> = [];
 
   public addNewReceiptItem(receiptItem: ReceiptItem) {
     this.receiptItems.push(receiptItem);

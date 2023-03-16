@@ -1,7 +1,11 @@
+<mat-divider style="margin-bottom: 1rem;"/>
+
 <!-- Listing the previously added ReceiptItem's -->
-  <div *ngFor="let item of receiptItems; index as i">
-    <app-receipt-item (receiptItem)="item"/>
-  </div>
+<div *ngFor="let item of receiptItems; index as i">
+  <app-receipt-item [receiptItem]="item"/>
+</div>
 
 <!-- ReceiptItem template, this is where you can add a new ReceiptItem -->
 <app-receipt-item (receiptItemEmitter)="addNewReceiptItem($event)"/>
+
+<mat-divider style="margin-top: 1rem; margin-bottom: 1rem;"/>
