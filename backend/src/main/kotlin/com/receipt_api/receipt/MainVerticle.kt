@@ -3,9 +3,11 @@ package com.receipt_api.receipt
 import com.receipt_api.receipt.ReceiptProcessor.ReceiptProcessor
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
+import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
+import io.vertx.ext.web.handler.CorsHandler
 import io.vertx.kotlin.core.json.json
 import io.vertx.kotlin.core.json.obj
 
@@ -14,8 +16,13 @@ class MainVerticle : AbstractVerticle() {
 
   override fun start(startPromise: Promise<Void>) {
 
+    val router = Router.router(vertx)
+
+    // Allow all origins (not secure but works for now)
+    router.route().handler(CorsHandler.create("*"))
+
     // Create router endpoints
-    val router = Router.router(vertx).apply {
+    router.apply {
       post("/receipts/process").handler(BodyHandler.create()).handler(this@MainVerticle::processReceipt)
       get("/receipts/:id/points").handler(BodyHandler.create()).handler(this@MainVerticle::getReceiptPointsById)
     }
@@ -39,7 +46,8 @@ class MainVerticle : AbstractVerticle() {
       context.response().statusCode = 400
       context.response().putHeader("X-Receipt-Missing-Data", "true")
       context.response().putHeader("Content-Type", "application/json")
-      context.response().end("{ \"error\": \"POST body is missing required data\" }")
+      context.json(JsonObject().put("error", "POST body is missing required data"))
+//      context.response().end("{ \"error\": \"POST body is missing required data\" }")
       return
     }
 
@@ -47,7 +55,8 @@ class MainVerticle : AbstractVerticle() {
       // create receipt object
       // this way sucks, i can't import "gson" so i have to do this by hand for now
       val receipt = ReceiptProcessor.fromJson(body)
-      println(receipt)
+
+      println(receipt) // debugging
 
       // process receipt object and store it in memory
       val receiptPoints = ReceiptProcessor.processReceipt(receipt)
@@ -55,7 +64,8 @@ class MainVerticle : AbstractVerticle() {
 
       context.response().statusCode = 200
       context.response().putHeader("Content-Type", "application/json")
-      context.response().end("{ \"id\": ${receipt.id} }")
+      context.json(JsonObject().put("id", receipt.id))
+//      context.response().end("{ \"id\": \"${receipt.id}\" }")
     } catch (e: Error) {
       // handle missing attributes in request here
       val cause = e.cause?.message
@@ -64,7 +74,8 @@ class MainVerticle : AbstractVerticle() {
       context.response().statusCode = 400
       context.response().putHeader("X-Receipt-Missing-Data", cause)
       context.response().putHeader("Content-Type", "application/json")
-      context.response().end("{ \"error\": \"$message\" }")
+      context.json(JsonObject().put("error", message))
+//      context.response().end("{ \"error\": \"$message\" }")
     }
   }
 
@@ -76,12 +87,14 @@ class MainVerticle : AbstractVerticle() {
       context.response().statusCode = 404
       context.response().putHeader("X-Receipt-Not-Exist", pathParamId)
       context.response().putHeader("Content-Type", "application/json")
-      context.response().end("{ \"error\": \"receipt not found\" }")
+      context.json(JsonObject().put("error", "receipt not found with id"))
+//      context.response().end("{ \"error\": \"receipt not found\" }")
       return
     }
 
     context.response().statusCode = 200
     context.response().putHeader("Content-Type", "application/json")
-    context.response().end("{ \"points\": $foundReceipt }")
+    context.json(JsonObject().put("points", foundReceipt))
+//    context.response().end("{ \"points\": $foundReceipt }")
   }
 }

@@ -1,0 +1,24 @@
+.main-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+mat-card-content {
+  width: 25rem;
+}
+
+mat-form-field {
+  width: 23rem;
+}
+
+button {
+  width: 22rem;
+  margin-left: 0.65rem;
+}

@@ -13,7 +13,6 @@ object ReceiptProcessor {
 
   // processes a receipt object and accrues any/all points for it
   fun processReceipt(receipt: Receipt): Int {
-    var points = 0
 
     // One point for every alphanumeric character in the retailer name.
     receipt.points += countAlphanumericCharacters(receipt.retailer)
