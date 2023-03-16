@@ -21,14 +21,14 @@ export class ReceiptApiService {
 
   public processReceipt(receipt: Receipt): Observable<ReceiptIdResponse> {
     return this.http.post<ReceiptIdResponse>(`${this.API_URL}/receipts/process`, receipt, this.httpOptions).pipe(
-      tap((id) => console.log(`Receipt ID from processing receipt: ${id}`)),
+      tap((id) => console.log(`Receipt ID from processing receipt: ${JSON.stringify(id)}`)),
       catchError(this.handleError<ReceiptIdResponse>("processReceipt"))
     );
   }
 
   public getReceiptPoints(id: string): Observable<ReceiptPointsResponse> {
     return this.http.get<ReceiptPointsResponse>(`${this.API_URL}/receipts/${id}/points`).pipe(
-      tap((points) => console.log(`Receipt points by id "${id}": ${points}`)),
+      tap((points) => console.log(`Receipt points by id "${id}": ${JSON.stringify(points)}`)),
       catchError(this.handleError<ReceiptPointsResponse>("getReceiptPoints"))
     );
   }
