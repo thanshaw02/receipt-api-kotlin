@@ -1,4 +1,6 @@
-:host { display: flex; }
+:host {
+  display: flex;
+}
 
 .snackbar-error {
   font-weight: lighter;

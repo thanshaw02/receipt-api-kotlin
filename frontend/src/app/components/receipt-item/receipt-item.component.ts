@@ -1,44 +1,52 @@
-import { 
-  Component, 
+import {
+  Component,
   EventEmitter,
   Input,
-  Output 
-} from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ReceiptError, ReceiptItem } from 'src/app/model';
-import { NotificationService } from 'src/app/services';
+  Output,
+} from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ReceiptError, ReceiptItem } from "src/app/model";
+import { NotificationService } from "src/app/services";
 
 @Component({
-  selector: 'app-receipt-item',
-  templateUrl: './receipt-item.component.html',
-  styleUrls: ['./receipt-item.component.css']
+  selector: "app-receipt-item",
+  templateUrl: "./receipt-item.component.html",
+  styleUrls: ["./receipt-item.component.css"],
 })
 export class ReceiptItemComponent {
-
   public constructor(
     private notificationService: NotificationService,
-    private notificationSnackBar: MatSnackBar,
-  ) { }
+    private notificationSnackBar: MatSnackBar
+  ) {}
 
   // this is used for displaying an already added ReceiptItem
-  @Input() 
+  @Input()
   public receiptItem?: ReceiptItem;
 
   // observable used between this component and parent component (ReceiptItemListComponent)
   // this emits when a new ReceiptItem is created/add
-  @Output() 
+  @Output()
   public receiptItemEmitter = new EventEmitter<ReceiptItem>();
 
-  public addReceiptItem(shortDescription: string, price: string): void {
+  public addReceiptItem(
+    shortDescription: string,
+    price: string
+  ): void {
     if (!shortDescription) {
-      this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.MissingItemDescription);
+      this.notificationService.setNotification(
+        this.notificationSnackBar,
+        ReceiptError.MissingItemDescription
+      );
     } else if (!price) {
-      this.notificationService.setNotification(this.notificationSnackBar, ReceiptError.MissingItemPrice);
+      this.notificationService.setNotification(
+        this.notificationSnackBar,
+        ReceiptError.MissingItemPrice
+      );
     } else {
       // emites the newly created ReceiptItem to the parent component "ReceiptItemList"
       this.receiptItemEmitter.emit({
         shortDescription: shortDescription,
-        price: price
+        price: price,
       });
     }
   }

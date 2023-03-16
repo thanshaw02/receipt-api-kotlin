@@ -8,8 +8,8 @@ import {
   ReceiptError,
   ReceiptSuccess,
   SnackbarData,
-  SnackbarSeverity
-} from "./snackbar-data"
+  SnackbarSeverity,
+} from "./snackbar-data";
 
 export {
   Receipt,

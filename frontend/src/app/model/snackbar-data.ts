@@ -5,8 +5,8 @@ type SnackbarData = {
 
 enum SnackbarSeverity {
   Success = "snackbar-success",
-  Error = "snackbar-error"
-};
+  Error = "snackbar-error",
+}
 
 enum ReceiptError {
   MissingRetailer = "Retailer name is missing from the form",
@@ -17,12 +17,12 @@ enum ReceiptError {
   MissingItemPrice = "Please enter a price for the receipt item",
   ReceiptSubmissionError = "There was an error submitting the receipt",
   // NOTE: when adding new possible error messages for the MatSnackBar add them here
-};
+}
 
 enum ReceiptSuccess {
   ReceiptSubmission = "Successfully submitted your receipt!",
   // NOTE: when adding new possible success messages for the MatSnackBar add them here
-};
+}
 
 export {
   ReceiptError,
