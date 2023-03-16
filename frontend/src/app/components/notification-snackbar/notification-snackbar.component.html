@@ -1,0 +1,12 @@
+<span class="{{ snackBarData.severity }} text-radius" matSnackBarLabel>
+  {{ snackBarData.message }}
+</span>
+
+<span class="{{ snackBarData.severity }} button-radius" matSnackBarActions>
+  <button
+    mat-icon-button
+    (click)="snackBarRef.dismissWithAction()"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</span>

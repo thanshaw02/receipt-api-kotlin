@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ReceiptError, ReceiptSuccess, SnackbarSeverity } from "src/app/model";
+import { NotificationSnackbarComponent } from "../../components";
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,18 @@ export class NotificationService {
 
   constructor() { }
   
-  public setNotification(snackBar: MatSnackBar, message: string): void {
-    snackBar.open(message, "Close", {
+  public setNotification(
+    snackBar: MatSnackBar, 
+    message: ReceiptError | ReceiptSuccess,
+    severity: SnackbarSeverity = SnackbarSeverity.Error, // defaults to the "error" severity
+  ): void {
+    snackBar.openFromComponent(NotificationSnackbarComponent, {
       verticalPosition: "top",
-      duration: 5000, // the user can cancel the snackbar or it will close on its own after 5 seconds
+      // duration: 5000,
+      data: {
+        message: message,
+        severity: severity,
+      },
     });
   }
 }

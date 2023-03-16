@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ReceiptError, Receipt, ReceiptItem } from 'src/app/model';
+import {
+  ReceiptError,
+  ReceiptSuccess,
+  Receipt,
+  ReceiptItem,
+  SnackbarSeverity
+} from 'src/app/model';
 import { NotificationService, ReceiptApiService } from "../../services";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-receipt-form',
   templateUrl: './receipt-form.component.html',
-  styleUrls: ['./receipt-form.component.css']
+  styleUrls: ['./receipt-form.component.css'],
 })
 export class ReceiptFormComponent {
 
@@ -40,7 +46,7 @@ export class ReceiptFormComponent {
       this.receiptApiService.processReceipt(possibleReceipt).subscribe(
         (receiptId) => {
           console.log(`\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`);
-          this.notificationService.setNotification(this.notificationSnackBar, "Successfully submitted your receipt!");
+          this.notificationService.setNotification(this.notificationSnackBar, ReceiptSuccess.ReceiptSubmission, SnackbarSeverity.Sucess);
         },
         (err) => {
           console.error(`Error posting receipt object -- ${err}`);

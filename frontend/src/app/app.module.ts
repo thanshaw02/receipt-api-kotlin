@@ -17,18 +17,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 // Project component imports
 import { AppRoutingModule } from './app-routing/index';
 import { AppComponent } from './app.component';
-import { 
-  ReceiptFormComponent,
-} from './components/index';
+import { ReceiptFormComponent } from './components/index';
 import { ReceiptItemListComponent } from './components/receipt-item-list/receipt-item-list.component';
 import { ReceiptItemComponent } from './components/receipt-item/receipt-item.component';
+import { NotificationSnackbarComponent } from './components/notification-snackbar/notification-snackbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReceiptFormComponent,
     ReceiptItemListComponent,
-    ReceiptItemComponent
+    ReceiptItemComponent,
+    NotificationSnackbarComponent
   ],
   imports: [
     BrowserModule,
