@@ -11,14 +11,14 @@ mat-card-title {
 }
 
 mat-card-content {
-  width: 25rem;
+  width: 30rem;
 }
 
 mat-form-field {
-  width: 23rem;
+  width: 28rem;
 }
 
 button {
-  width: 22rem;
+  width: 27rem;
   margin-left: 0.65rem;
 }
