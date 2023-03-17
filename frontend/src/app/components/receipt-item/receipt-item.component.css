@@ -20,6 +20,14 @@ mat-form-field {
   margin-left: 0.5rem;
 }
 
+.receipt-item-title {
+  font-weight: bold;
+  text-align: center;
+
+  /* this is a hack, realistically i need to address why the items in this div are off-centered to the right instead of compensating with a negative left margin */
+  margin-left: -2rem;
+}
+
 mat-divider {
   margin-bottom: 1rem;
   margin-left: 0.5rem;
