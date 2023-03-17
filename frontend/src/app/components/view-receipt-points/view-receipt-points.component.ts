@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
 import { Observable, of } from "rxjs";
+import { ReceiptPointsResponse } from "../../model";
 import { ReceiptApiService } from "../../services";
 
 @Component({
@@ -9,6 +10,7 @@ import { ReceiptApiService } from "../../services";
   styleUrls: ["./view-receipt-points.component.css"]
 })
 export class ViewReceiptPointsComponent implements OnInit {
+  // Angular convention is to end an Observable's variable name with "$"
   public receiptPoints$?: Observable<string>;
 
   public constructor(
@@ -17,8 +19,9 @@ export class ViewReceiptPointsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    // fetch accrued receipt points via backend GET endpoint
     this.receiptApi.getReceiptPoints(this.receiptId).subscribe(
-      (receiptPoints) => {
+      (receiptPoints: ReceiptPointsResponse) => {
         console.log(`Receipt points accrued: ${receiptPoints.points}`);
         this.receiptPoints$ = of(receiptPoints.points);
       },

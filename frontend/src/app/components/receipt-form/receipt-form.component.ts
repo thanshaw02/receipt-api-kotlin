@@ -9,6 +9,7 @@ import {
   Receipt,
   ReceiptItem,
   SnackbarSeverity,
+  ReceiptIdResponse,
 } from "src/app/model";
 import {
   NotificationService,
@@ -51,16 +52,14 @@ export class ReceiptFormComponent {
       this.receiptApiService
         .processReceipt(possibleReceipt)
         .subscribe(
-          (receiptId) => {
-            console.log(
-              `\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`
-            );
+          (receiptId: ReceiptIdResponse) => {
             this.notificationService.setNotification(
               this.notificationSnackBar,
               ReceiptSuccess.ReceiptSubmission,
               SnackbarSeverity.Success
             );
-            // opening instantly for debugging
+
+            // display receipt accrued points via material UI bottom sheet
             this.viewReceiptPointsSheet.open(ViewReceiptPointsComponent, {
               data: receiptId.id
             });

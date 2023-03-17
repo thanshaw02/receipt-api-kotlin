@@ -1,3 +1,14 @@
-<span>
-  {{ receiptPoints$ | async }}
-</span>
+<!-- 
+  This is pretty ugly, frontend design isn't my strongest suite and Angular MUI isn't nearly as in-depth as React MUI is.
+  I plan on coming back to this and cleaning it up, possibly removing this and using a "Dialog" instead, we'll see -- but for
+  now this works and displays the accrued points of a submitted receipt.
+ -->
+
+<div class="main-content">
+  <h1>Viewing Accrued Receipt Points</h1>
+  <br>
+  <h1>
+    <!-- using the async Angular pipe to read in the "receiptPoints" observable -->
+    {{ receiptPoints$ | async }}
+  </h1>
+</div>
