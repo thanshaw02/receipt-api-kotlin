@@ -75,9 +75,7 @@ export class ReceiptFormComponent {
         );
       /* eslint-disable @typescript-eslint/no-explicit-any */
     } catch (e: any) {
-      this.notificationService.setNotification(
-        e.message
-      );
+      this.notificationService.setNotification(e.message);
     }
   }
 

@@ -14,7 +14,7 @@ import { NotificationService } from "src/app/services";
 })
 export class ReceiptItemComponent {
   public constructor(
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   // this is used for displaying an already added ReceiptItem

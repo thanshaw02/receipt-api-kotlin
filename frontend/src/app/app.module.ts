@@ -23,7 +23,7 @@ import {
   ReceiptFormComponent,
   ReceiptItemComponent,
   ReceiptItemListComponent,
-  ViewReceiptPointsComponent
+  ViewReceiptPointsComponent,
 } from "./components/index";
 
 @NgModule({

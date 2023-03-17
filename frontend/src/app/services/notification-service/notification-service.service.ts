@@ -17,13 +17,16 @@ export class NotificationService {
     message: ReceiptError | ReceiptSuccess,
     severity: SnackbarSeverity = SnackbarSeverity.Error // defaults to the "error" severity
   ): void {
-    this.notificationSnackbar.openFromComponent(NotificationSnackbarComponent, {
-      verticalPosition: "top",
-      duration: 5000, // if the user doesn't close the snackbar after 5 seconds it will close itself
-      data: {
-        message: message,
-        severity: severity,
-      },
-    });
+    this.notificationSnackbar.openFromComponent(
+      NotificationSnackbarComponent,
+      {
+        verticalPosition: "top",
+        duration: 5000, // if the user doesn't close the snackbar after 5 seconds it will close itself
+        data: {
+          message: message,
+          severity: severity,
+        },
+      }
+    );
   }
 }
