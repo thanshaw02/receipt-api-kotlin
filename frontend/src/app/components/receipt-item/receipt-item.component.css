@@ -2,6 +2,14 @@ mat-form-field {
   width: 12rem;
 }
 
+.added-item-style {
+  width: 12rem;
+}
+
+.template-style {
+  width: 13.8rem;
+}
+
 .edit-button {
   margin-bottom: 1rem;
   margin-left: 0.5rem;
@@ -9,11 +17,11 @@ mat-form-field {
 
 .submit-button {
   width: 27rem;
-  margin-left: 0.65rem;
+  margin-left: 0.5rem;
 }
 
 mat-divider {
   margin-bottom: 1rem;
   margin-left: 0.5rem;
-  width: 22rem;
+  width: 26.75rem;
 }

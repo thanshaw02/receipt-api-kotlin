@@ -7,12 +7,12 @@
   <tr>
     <td>
       <!-- Receipt item short description -->
-      <mat-form-field>
+      <mat-form-field class="{{ inputFieldStyles }}">
         <mat-label for="short-description">
           Short Description
         </mat-label>
         <input
-          disabled="{{ receiptItem !== undefined }}"
+          [disabled]="editingReceiptItem"
           id="short-description" 
           matInput 
           type="text"
@@ -23,12 +23,12 @@
     </td>
     <td style="padding-left: 0.25rem;">
       <!-- Receipt item price -->
-      <mat-form-field>
+      <mat-form-field class="{{ inputFieldStyles }}">
         <mat-label for="price">
           Price
         </mat-label>
         <input
-          disabled="{{ receiptItem !== undefined }}"
+          [disabled]="editingReceiptItem"
           id="price" 
           matInput 
           type="number" 
@@ -37,11 +37,14 @@
         >
       </mat-form-field>
     </td>
-    <td>
-      <!-- Receipt item edit toggle button -->
+    <!-- Receipt item edit toggle button -->
+    <!-- This should only be displayed for ReceiptItems that have previously been added, not the template ReceiptItem -->
+    <td *ngIf="receiptItem">
       <button
         class="edit-button"
+        type="button"
         mat-icon-button
+        (click)="editReceiptItem()"
       >
         <mat-icon fontIcon="edit"/>
       </button>
