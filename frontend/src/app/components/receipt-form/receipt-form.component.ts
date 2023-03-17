@@ -1,17 +1,20 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { ViewReceiptPointsComponent } from "../view-receipt-points/view-receipt-points.component";
 import {
   ReceiptError,
   ReceiptSuccess,
   Receipt,
   ReceiptItem,
   SnackbarSeverity,
+  ReceiptIdResponse,
 } from "src/app/model";
 import {
   NotificationService,
   ReceiptApiService,
 } from "../../services";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-receipt-form",
@@ -20,9 +23,10 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ReceiptFormComponent {
   constructor(
-    private notificationService: NotificationService,
+    private viewReceiptPointsSheet: MatBottomSheet,
     private notificationSnackBar: MatSnackBar,
-    private receiptApiService: ReceiptApiService
+    private receiptApiService: ReceiptApiService,
+    private notificationService: NotificationService
   ) {}
 
   // receipt fields
@@ -48,14 +52,19 @@ export class ReceiptFormComponent {
       this.receiptApiService
         .processReceipt(possibleReceipt)
         .subscribe(
-          (receiptId) => {
-            console.log(
-              `\nReceiptIdResponse:\n${JSON.stringify(receiptId)}\n`
-            );
+          (receiptId: ReceiptIdResponse) => {
             this.notificationService.setNotification(
               this.notificationSnackBar,
               ReceiptSuccess.ReceiptSubmission,
               SnackbarSeverity.Success
+            );
+
+            // display receipt accrued points via material UI bottom sheet
+            this.viewReceiptPointsSheet.open(
+              ViewReceiptPointsComponent,
+              {
+                data: receiptId.id,
+              }
             );
           },
           (err) => {

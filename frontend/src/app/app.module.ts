@@ -13,22 +13,27 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 
-// Project component imports
+// Project imports
 import { AppRoutingModule } from "./app-routing/index";
 import { AppComponent } from "./app.component";
-import { ReceiptFormComponent } from "./components/index";
-import { ReceiptItemListComponent } from "./components/receipt-item-list/receipt-item-list.component";
-import { ReceiptItemComponent } from "./components/receipt-item/receipt-item.component";
-import { NotificationSnackbarComponent } from "./components/notification-snackbar/notification-snackbar.component";
+import {
+  NotificationSnackbarComponent,
+  ReceiptFormComponent,
+  ReceiptItemComponent,
+  ReceiptItemListComponent,
+  ViewReceiptPointsComponent
+} from "./components/index";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReceiptFormComponent,
-    ReceiptItemListComponent,
-    ReceiptItemComponent,
     NotificationSnackbarComponent,
+    ReceiptFormComponent,
+    ReceiptItemComponent,
+    ReceiptItemListComponent,
+    ViewReceiptPointsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { NotificationSnackbarComponent } from "./components/notification-snackba
     HttpClientModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatBottomSheetModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
