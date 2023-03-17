@@ -54,7 +54,6 @@ export class ReceiptFormComponent {
         .subscribe(
           (receiptId: ReceiptIdResponse) => {
             this.notificationService.setNotification(
-              this.notificationSnackBar,
               ReceiptSuccess.ReceiptSubmission,
               SnackbarSeverity.Success
             );
@@ -70,7 +69,6 @@ export class ReceiptFormComponent {
           (err) => {
             console.error(`Error posting receipt object -- ${err}`);
             this.notificationService.setNotification(
-              this.notificationSnackBar,
               ReceiptError.ReceiptSubmissionError
             );
           }
@@ -78,7 +76,6 @@ export class ReceiptFormComponent {
       /* eslint-disable @typescript-eslint/no-explicit-any */
     } catch (e: any) {
       this.notificationService.setNotification(
-        this.notificationSnackBar,
         e.message
       );
     }
