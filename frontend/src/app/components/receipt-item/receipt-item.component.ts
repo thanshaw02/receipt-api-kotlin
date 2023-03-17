@@ -4,7 +4,6 @@ import {
   Input,
   Output,
 } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { ReceiptError, ReceiptItem } from "src/app/model";
 import { NotificationService } from "src/app/services";
 
@@ -15,8 +14,7 @@ import { NotificationService } from "src/app/services";
 })
 export class ReceiptItemComponent {
   public constructor(
-    private notificationService: NotificationService,
-    private notificationSnackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {}
 
   // this is used for displaying an already added ReceiptItem
@@ -34,12 +32,10 @@ export class ReceiptItemComponent {
   ): void {
     if (!shortDescription) {
       this.notificationService.setNotification(
-        this.notificationSnackBar,
         ReceiptError.MissingItemDescription
       );
     } else if (!price) {
       this.notificationService.setNotification(
-        this.notificationSnackBar,
         ReceiptError.MissingItemPrice
       );
     } else {
