@@ -26,7 +26,7 @@ export class ReceiptFormComponent {
     private viewReceiptPointsSheet: MatBottomSheet,
     private notificationSnackBar: MatSnackBar,
     private receiptApiService: ReceiptApiService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   // receipt fields
@@ -60,9 +60,12 @@ export class ReceiptFormComponent {
             );
 
             // display receipt accrued points via material UI bottom sheet
-            this.viewReceiptPointsSheet.open(ViewReceiptPointsComponent, {
-              data: receiptId.id
-            });
+            this.viewReceiptPointsSheet.open(
+              ViewReceiptPointsComponent,
+              {
+                data: receiptId.id,
+              }
+            );
           },
           (err) => {
             console.error(`Error posting receipt object -- ${err}`);
