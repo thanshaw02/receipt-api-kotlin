@@ -2,7 +2,10 @@
 
 <!-- Listing the previously added ReceiptItem's -->
 <div *ngFor="let item of receiptItems; index as i">
-  <app-receipt-item [receiptItem]="item"/>
+  <app-receipt-item
+    [receiptItem]="item"
+    (editReceiptItemEmitter)="editReceiptItem($event)"
+  />
 </div>
 
 <!-- ReceiptItem template, this is where you can add a new ReceiptItem -->
