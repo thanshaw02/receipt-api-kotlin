@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { ViewReceiptPointsComponent } from "../view-receipt-points/view-receipt-points.component";
 import {
@@ -24,25 +23,55 @@ import {
 export class ReceiptFormComponent {
   constructor(
     private viewReceiptPointsSheet: MatBottomSheet,
-    private notificationSnackBar: MatSnackBar,
     private receiptApiService: ReceiptApiService,
     private notificationService: NotificationService
   ) {}
 
   // receipt fields
-  public receiptItems: Array<ReceiptItem> = [];
-  public total = "0.00";
   public receiptForm = new FormGroup({
     retailerName: new FormControl(""),
     purchaseDate: new FormControl(""),
     purchaseTime: new FormControl(""),
   });
+  public receiptItems: Array<ReceiptItem> = [];
+  public total = "$0.00";
 
   // binding between array of ReceiptItem's in child component (ReceiptItemList) and this component
   public updateReceiptItems(receiptItem: ReceiptItem): void {
-    const summedTotal = (+this.total + +receiptItem.price).toString();
-    this.total = parseFloat(summedTotal).toFixed(2);
+    const summedTotal = (
+      +this.formatTotal() + +receiptItem.price
+    ).toString();
+    this.total = `$${parseFloat(summedTotal).toFixed(2)}`;
     this.receiptItems.push(receiptItem);
+  }
+
+  // binding that connects this component to the ReceiptItemListComponent, handles editing of an added ReceiptItem
+  public editReceiptItem(receiptItem: ReceiptItem): void {
+    // verify the ReceiptItem being updated is present in the ReceiptItem array
+    const itemToUpdate = this.receiptItems.find(
+      (item) => item.id === receiptItem.id
+    );
+    if (!itemToUpdate) {
+      this.notificationService.setNotification(
+        ReceiptError.ReceiptItemNotFound
+      );
+      return;
+    }
+
+    // change the price if the price has been changed
+    if (itemToUpdate.price !== receiptItem.price) {
+      const subtractedTotal = (
+        +this.formatTotal() - +itemToUpdate.price
+      ).toString();
+      const newTotal = (
+        +subtractedTotal + +receiptItem.price
+      ).toString();
+      this.total = `$${parseFloat(newTotal).toFixed(2)}`;
+    }
+
+    // update the array of ReceiptItems
+    const itemIndex = this.receiptItems.indexOf(itemToUpdate);
+    this.receiptItems[itemIndex] = receiptItem;
   }
 
   public submitForm(): void {
@@ -104,8 +133,13 @@ export class ReceiptFormComponent {
       purchaseDate: purchaseDate,
       purchaseTime: purchaseTime,
       items: this.receiptItems,
-      total: this.total,
+      total: this.formatTotal(),
     };
     return receipt;
+  }
+
+  // this removes the "$" in front of the total
+  private formatTotal(): string {
+    return this.total.substring(1);
   }
 }

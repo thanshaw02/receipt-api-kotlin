@@ -1,14 +1,35 @@
 mat-form-field {
-  width: 11.5rem;
+  width: 12rem;
 }
 
-button {
-  width: 22rem;
-  margin-left: 0.65rem;
+.added-item-style {
+  width: 12rem;
+}
+
+.template-style {
+  width: 13.8rem;
+}
+
+.edit-button {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
+
+.submit-button {
+  width: 27rem;
+  margin-left: 0.5rem;
+}
+
+.receipt-item-title {
+  font-weight: bold;
+  text-align: center;
+
+  /* this is a hack, realistically i need to address why the items in this div are off-centered to the right instead of compensating with a negative left margin */
+  margin-left: -2rem;
 }
 
 mat-divider {
   margin-bottom: 1rem;
   margin-left: 0.5rem;
-  width: 22rem;
+  width: 26.75rem;
 }

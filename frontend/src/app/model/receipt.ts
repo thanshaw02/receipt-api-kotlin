@@ -7,6 +7,7 @@ type ReceiptIdResponse = {
 };
 
 type ReceiptItem = {
+  id: string;
   shortDescription: string;
   price: string;
 };

@@ -1,18 +1,18 @@
 <!-- Receipt item title -->
-<span style="margin-left: 9.75rem; font-weight: bold;">
+<div class="receipt-item-title">
   {{ receiptItem?.shortDescription || "Add Item" }}
-</span>
+</div>
 
 <table style="margin-top: 1rem;" cellspacing="0">
   <tr>
     <td>
       <!-- Receipt item short description -->
-      <mat-form-field>
+      <mat-form-field class="{{ inputFieldStyles }}">
         <mat-label for="short-description">
           Short Description
         </mat-label>
         <input
-          disabled="{{ receiptItem !== undefined }}"
+          [disabled]="!isEditing"
           id="short-description" 
           matInput 
           type="text"
@@ -21,14 +21,14 @@
         >
       </mat-form-field>
     </td>
-    <td>
+    <td style="padding-left: 0.25rem;">
       <!-- Receipt item price -->
-      <mat-form-field>
+      <mat-form-field class="{{ inputFieldStyles }}">
         <mat-label for="price">
           Price
         </mat-label>
         <input
-          disabled="{{ receiptItem !== undefined }}"
+          [disabled]="!isEditing"
           id="price" 
           matInput 
           type="number" 
@@ -37,16 +37,30 @@
         >
       </mat-form-field>
     </td>
+    <!-- Receipt item edit toggle button -->
+    <!-- This should only be displayed for ReceiptItems that have previously been added, not the template ReceiptItem -->
+    <td *ngIf="receiptItem">
+      <button
+        class="edit-button"
+        type="button"
+        mat-icon-button
+        (click)="editReceiptItem(shortDescription.value, price.value)"
+      >
+        <mat-icon fontIcon="edit"/>
+      </button>
+    </td>
   </tr>
 </table>
 <div *ngIf="!receiptItem">
+  <!-- Receipt item add button -->
   <!-- Button displayed only if this element is the template one -->
-  <!-- NOTE: Add "+" icon to this button if possible to make it look nice -->
   <button
+    class="submit-button"
     type="button"
     mat-raised-button
     (click)="addReceiptItem(shortDescription.value, price.value)"
   >
+    <mat-icon fontIcon="add"/>
     Add Item
   </button>
 </div>

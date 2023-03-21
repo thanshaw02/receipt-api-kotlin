@@ -29,17 +29,23 @@
           <br>
 
           <!-- Items -->
-          <app-receipt-item-list (receiptItemsEmitter)="updateReceiptItems($event)"/>
+          <app-receipt-item-list 
+            (receiptItemsEmitter)="updateReceiptItems($event)"
+            (editReceiptItemEmitter)="editReceiptItem($event)"
+          />
 
           <!-- Total -->
           <mat-form-field>
             <mat-label for="total">Total</mat-label>
-            <input disabled id="total" matInput type="number" value="{{ total }}">
+            <input disabled id="total" matInput type="text" value="{{ total }}">
           </mat-form-field>
           <br>
 
           <!-- Submit -->
-          <button mat-raised-button type="submit">Submit</button>
+          <button mat-raised-button type="submit">
+            <mat-icon fontIcon="shopping_cart_checkout"/>
+            Submit
+          </button>
         </form>
       </mat-card-content>
     </mat-card-content>

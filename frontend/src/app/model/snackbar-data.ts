@@ -16,6 +16,8 @@ enum ReceiptError {
   MissingItemDescription = "Please enter a short description of the receipt item",
   MissingItemPrice = "Please enter a price for the receipt item",
   ReceiptSubmissionError = "There was an error submitting the receipt",
+  EditReceiptItemError = "When editing an item the item must have a description and price",
+  ReceiptItemNotFound = "You are attempting to edit a receipt item that doesn't exist",
   // NOTE: when adding new possible error messages for the MatSnackBar add them here
 }
 
