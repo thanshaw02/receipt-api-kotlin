@@ -38,15 +38,19 @@ export class ReceiptFormComponent {
 
   // binding between array of ReceiptItem's in child component (ReceiptItemList) and this component
   public updateReceiptItems(receiptItem: ReceiptItem): void {
-    const summedTotal = (+this.formatTotal() + +receiptItem.price).toString();
-    this.total = `\$${parseFloat(summedTotal).toFixed(2)}`;
+    const summedTotal = (
+      +this.formatTotal() + +receiptItem.price
+    ).toString();
+    this.total = `$${parseFloat(summedTotal).toFixed(2)}`;
     this.receiptItems.push(receiptItem);
   }
 
   // binding that connects this component to the ReceiptItemListComponent, handles editing of an added ReceiptItem
   public editReceiptItem(receiptItem: ReceiptItem): void {
     // verify the ReceiptItem being updated is present in the ReceiptItem array
-    const itemToUpdate = this.receiptItems.find((item) => item.id === receiptItem.id);
+    const itemToUpdate = this.receiptItems.find(
+      (item) => item.id === receiptItem.id
+    );
     if (!itemToUpdate) {
       this.notificationService.setNotification(
         ReceiptError.ReceiptItemNotFound
@@ -56,9 +60,13 @@ export class ReceiptFormComponent {
 
     // change the price if the price has been changed
     if (itemToUpdate.price !== receiptItem.price) {
-      const subtractedTotal = ((+this.formatTotal() - +itemToUpdate.price)).toString();
-      const newTotal = (+subtractedTotal + +receiptItem.price).toString();
-      this.total = `\$${parseFloat(newTotal).toFixed(2)}`;
+      const subtractedTotal = (
+        +this.formatTotal() - +itemToUpdate.price
+      ).toString();
+      const newTotal = (
+        +subtractedTotal + +receiptItem.price
+      ).toString();
+      this.total = `$${parseFloat(newTotal).toFixed(2)}`;
     }
 
     // update the array of ReceiptItems

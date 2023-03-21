@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 import { ReceiptError, ReceiptItem } from "src/app/model";
 import { NotificationService } from "src/app/services";
 
@@ -21,7 +21,9 @@ export class ReceiptItemComponent implements OnInit {
 
   public ngOnInit(): void {
     // decide which styling is needed based on if this ReceiptItem component is displaying an added item or the template
-    this.inputFieldStyles = this.receiptItem ? "added-item-style" : "template-style";
+    this.inputFieldStyles = this.receiptItem
+      ? "added-item-style"
+      : "template-style";
 
     // this is bad logic, it works but i have a double negative i think which makes this hard to read
     // in the html the two input fields disabled state is set to the opposite of this.isEditing
@@ -40,7 +42,7 @@ export class ReceiptItemComponent implements OnInit {
 
   @Output()
   public editReceiptItemEmitter = new EventEmitter<ReceiptItem>();
-  
+
   // keeps track of a ReceiptItem and if it is being edited or not
   // public editingReceiptItem: Observable<boolean> = new Observable<boolean>(); // originally using an observable here
   public isEditing: boolean = true;
@@ -76,13 +78,13 @@ export class ReceiptItemComponent implements OnInit {
   ): void {
     if (!this.receiptItem || !shortDescription || !price) {
       this.notificationService.setNotification(
-        ReceiptError.EditReceiptItemError,
+        ReceiptError.EditReceiptItemError
       );
       return;
     }
 
-    const hasBeenEdited = 
-      this.receiptItem.shortDescription !== shortDescription || 
+    const hasBeenEdited =
+      this.receiptItem.shortDescription !== shortDescription ||
       this.receiptItem.price !== price;
 
     // if edits were made then we want to emit those changes up
