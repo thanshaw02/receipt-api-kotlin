@@ -82,3 +82,13 @@ You may do further testing my creating your own receipt objects, counting the po
 
 **Note:**
 - You may submit as many receipt objects as you like, just make sure that the points accrued add up to the actual poinst accrued for the receipt
+
+# Helpful Links/Rules
+
+- [Installing the _Maven CLI_ using Ubuntu WSL 2 (Windows Subsystem for Linux)](https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu)
+
+- [Installing the _Angular CLI_](https://angular.io/cli) (You will need to have `npm` installed as well)
+
+- [This link walks you through the steps to install _npm_ (Node Package Manager) for Ubuntu WSL 2 (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl)
+
+- [This link includes the rules around how points are accrued for a given _Receipt_ object](https://github.com/fetch-rewards/receipt-processor-challenge#rules)
