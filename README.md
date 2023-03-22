@@ -82,6 +82,8 @@ You may do further testing my creating your own receipt objects, counting the po
 
 **Note:**
 - You may submit as many receipt objects as you like, just make sure that the points accrued add up to the actual poinst accrued for the receipt
+- When adding new receipt items, if you have a **typo** you can edit the added receipt item by clicking on the _edit/pencil_ icon button that is to the right of each added receipt item. Simply click on the edit button to enable the input fields, make your edits, then click the edit button again to disable the fields.
+    - Verify that if any _price_ changes were made to a receipt item that the _total_ field towards the bottom of the form was updated correctly.
 
 # Helpful Links/Rules
 
