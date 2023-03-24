@@ -2,7 +2,7 @@
 
 This is another re-write of a small project I did previously, I'm building an API using the `Vert.x` frameform and `Kotlin`.
 
-The frontend is built using `TypeScript` and `Angular` -- this is my first time touching `Angular` in a year, my previoujs experience was strictly with `Angular.js`. This time around I am using `Angular 2` instead.
+The frontend is built using `TypeScript` and `Angular` -- this is my first time touching `Angular` in a bit, my previous experience was strictly with `Angular.js`. This time around I am using `Angular 2` instead, great learning experience and I'm able to work with TypeScript.
 
 # How to start the backend
 
